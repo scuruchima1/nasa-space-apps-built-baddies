@@ -6,7 +6,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeMoveDown 1s forwards;
 }
 
 code {
@@ -23,7 +25,6 @@ code {
   left: 50px;
   border: 3px solid black;
   border-radius: 50px;
-  
 }
 /* ^^^ text in the rounded square */
 #head-text {
@@ -41,5 +42,18 @@ code {
   border: 3px solid black;
   text-align: left;
   margin: 50px 0 0 50px;
-  
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes fadeMoveDown {
+  to {
+    opacity: 1;
+    transform: translateY(0);   /* move down into place */
+  }
 }
