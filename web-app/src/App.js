@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import builtLogo from './images/built-logo.png';
 import './App.css';
 import ChatRunner from "./components/components";
 function App() {
@@ -8,10 +9,13 @@ function App() {
 
       <div id="box">
         <p>This website is a tool for urban planners that leverages data to provide appropriatte initiatives in the city of Chicago</p>
-
+        
         <ChatRunner />
       </div>
 
+      <a href="https://built-illinois.org/#/Home">
+        <img id="built" src={builtLogo} alt="Built Logo" />
+      </a>
       
     </div>
 
