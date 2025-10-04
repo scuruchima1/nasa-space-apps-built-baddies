@@ -7,9 +7,10 @@ import json
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+import requests
 
 BASE = Path(__file__).resolve().parent
-load_dotenv(BASE / ".env") 
+load_dotenv()
 
 BASE = Path(__file__).resolve().parent
 DATA_PROCESSED = BASE / "data" / "processed"
@@ -41,6 +42,30 @@ def chat():
     print(response.output_text)
     
     return jsonify({"message": "ran chat", "response": response.output_text})
+
+@app.get("/pollutiondata")
+def pollution_data():
+    EPA_EMAIL = os.getenv("EPA_API_EMAIL")
+    EPA_KEY = os.getenv("EPA_API_KEY")
+
+    url = "https://aqs.epa.gov/data/api/dailyData/byCounty"
+    params = {
+        "email": EPA_EMAIL,
+        "key": EPA_KEY,
+        "param": "88101",      # Ozone
+        "bdate": "20160101",   # Start date
+        "edate": "20160229",   # End date
+        "state": "17",         # Illinois
+        "county": "031"        # Cook County
+    }
+    
+    response = requests.get(url, params=params)
+    
+    # Check if the request was successful
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return {"error": f"Failed to fetch data, status code: {response.status_code}"}
 
 if __name__ == "__main__":
     # Use the same interpreter you installed Flask with
