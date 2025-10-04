@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+import ChatRunner from "./components/components";
 function App() {
   return (
     <div className="App" backgroundColor="rgb(102,152,101)">
@@ -8,6 +8,8 @@ function App() {
 
       <div id="box">
         <p>This website is a tool for urban planners that leverages data to provide appropriatte initiatives in the city of Chicago</p>
+
+        <ChatRunner />
       </div>
 
       
