@@ -46,8 +46,8 @@ code {
 
 #built {
   position: absolute;   
-  top: 25px;          
-  right: 35px;         
+  top: 0px;          
+  right: 5px;         
   width: 100px;         
 }
 
