@@ -8,7 +8,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   opacity: 0;
   transform: translateY(-20px);
-  animation: fadeMoveDown 1s forwards;
+  animation: fadeMoveDown 2s forwards;
 }
 
 code {
