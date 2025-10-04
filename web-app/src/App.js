@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import builtLogo from './images/built-logo.png';
+import builtLogo from './built-logo.png';
 import './App.css';
 import ChatRunner from "./components/components";
 function App() {
