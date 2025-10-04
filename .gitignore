@@ -28,6 +28,3 @@ web-app/node_modules/
 web-app/.env*
 web-app/dist/
 web-app/build/
-
-datasets/*
-!datasets/exampledata.json
