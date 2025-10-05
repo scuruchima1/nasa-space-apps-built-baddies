@@ -40,28 +40,20 @@ function App() {
         <div className="greeny-logo-container"></div>
          <img src="rgreeny.png" alt="greeny" width="300" height="300"></img>
         </div>
-      
-      {/* drop down menu button section start*/}
-      const [dropdownOptions, setDropdownOptions] = useSTate([]);
+     
 
-      useEffect(() {
-        // load and parse csv
-        Papa.parse("datasets/Muni_25_chi_csv.csv", {
-          download: true,
-          header: true,
-          complete: function(results) {
-            const GEOG = results.data.map(row => row.GEOG).filter(Boolean);
-            const uniqueMunicipalities = [...new Set(municipalities)];
-            setDropdownOptions(uniqueMunicipalities);
-          }
-        })
-      }
-      )
-        {/* dropdown section end  */}
-      
-      
+     <div className= "Gen_Dashboard">
+      <div id= "banner">
+        <p> Chicago Dashboard</p>
       </div>
+      <div id = "mini banner">
+        <p> The following dashboard provides visualizations based on data from the general Chicago Land area!</p>
+      </div>
+     </div>
 
+    </div>
+
+    
   );
 }
 
