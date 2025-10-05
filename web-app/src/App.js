@@ -11,11 +11,30 @@ function App() {
       </a>
       </div>
 
-      <div id="box">
-        <p>This website is a tool for urban planners that leverages data to provide appropriatte initiatives in the city of Chicago</p>
-        
+    <div className="content-wrapper"> 
+    
+   
+        <div id="box">
+         <p>This website is a tool for urban planners that leverages data to provide appropriate initiatives in the city of Chicago</p>
+        </div>
+ 
+        <div id="map">
+         <img src="chi-map.png" alt="Chicago Map" width="250" height="319.5" />
+        </div>
+
+    </div>
+
+  
+
+      <div className= "greenytro">
+        <div id="box">
+          <p> As you use our urban planning tool we also have our personal assitant Greeny at your disposal!  </p>
+        </div>
         <ChatRunner />
+       
+
       </div>
+
 
      
       

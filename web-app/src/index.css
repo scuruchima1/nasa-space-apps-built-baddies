@@ -64,3 +64,48 @@ code {
     transform: translateY(0);   /* move down into place */
   }
 }
+
+.content-wrapper {
+  /* 1. Keeps the side-by-side layout */
+  display: flex; 
+  
+  /* 2. Arranges items horizontally */
+  flex-direction: row; 
+  
+  /* 3. Adds space between the box and the map */
+  gap: 50px; 
+  
+  /* NEW: Ensures the wrapper takes the full width available */
+  width: 100%; 
+  
+  /* NEW: Pushes the flex items (text box and map) to the end (right) */
+  justify-content: flex-end; /* This is the key change! */
+  
+  /* Aligns items to the top */
+  align-items: flex-start;
+  
+  /* Adjust padding/margin for spacing from the edges */
+  padding: 40px 50px; /* Add padding on all sides, especially the right */
+  box-sizing: border-box; /* Includes padding in the element's total width */
+}
+
+/* Children Sizing (adjust as needed) */
+#box {
+  /* Give the box a maximum size */
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  max-width: 300px; 
+  flex-shrink: 0; /* Prevents the box from shrinking too much */
+}
+
+#map {
+  /* Give the map area a maximum size */
+  max-width: 400px; 
+}
+
+#map img {
+  /* Ensure the image scales correctly within its container */
+  width: 100%;
+  height: auto;
+  display: block; 
+}
