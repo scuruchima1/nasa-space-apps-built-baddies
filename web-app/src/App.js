@@ -60,6 +60,8 @@ function GreenyCircle() {
           }}
         >
           <p>Hello! I’m Greeny. How can I help you today?</p>
+          <label for="name"></label>
+        <input type="text" id="name" name="name" placeholder="Enter text here!" size="45"></input>
         </div>
       )}
     </div>
