@@ -124,7 +124,7 @@ function App() {
       </section>
 
       <div className="greenytro">
-        <img src="animated_city.png" width="500" height="600" />
+        <img src="animated_city.png" width="500" height="500" />
         <div id="box2">
           <p>
             As you use our urban planning tool we also have our personal assitant Greeny at your disposal!
