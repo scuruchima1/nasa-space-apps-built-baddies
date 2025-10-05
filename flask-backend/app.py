@@ -39,6 +39,7 @@ def chat():
         model="gpt-5",
         input="Write a short bedtime story about a unicorn."
     )
+    #gives prompt to Ai
     print(response.output_text)
     
     return jsonify({"message": "ran chat", "response": response.output_text})
@@ -70,3 +71,5 @@ def pollution_data():
 if __name__ == "__main__":
     # Use the same interpreter you installed Flask with
     app.run(host="0.0.0.0", port=5500, debug=True)
+
+#visualization

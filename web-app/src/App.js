@@ -2,6 +2,11 @@ import logo from './logo.svg';
 import builtLogo from './built-logo.png';
 import './App.css';
 import ChatRunner from "./components/components";
+
+// added for dropdown menu
+import React, { useEffect, useState } from "react";
+import Papa from "papaparse";
+
 function App() {
   return (
     <div className="App" backgroundColor="rgb(0,91,77)">
@@ -35,11 +40,28 @@ function App() {
         <div className="greeny-logo-container"></div>
          <img src="rgreeny.png" alt="greeny" width="300" height="300"></img>
         </div>
+      
+      {/* drop down menu button section start*/}
+      const [dropdownOptions, setDropdownOptions] = useSTate([]);
+
+      useEffect(() {
+        // load and parse csv
+        Papa.parse("datasets/Muni_25_chi_csv.csv", {
+          download: true,
+          header: true,
+          complete: function(results) {
+            const GEOG = results.data.map(row => row.GEOG).filter(Boolean);
+            const uniqueMunicipalities = [...new Set(municipalities)];
+            setDropdownOptions(uniqueMunicipalities);
+          }
+        })
+      }
+      )
+        {/* dropdown section end  */}
+      
+      
       </div>
 
-
-
-    
   );
 }
 
