@@ -8,7 +8,7 @@ import React, { useEffect, useState, useRef} from "react";
 import Papa from "papaparse";
 
 
-
+// this detects the clicks on the circle or not
 function GreenyCircle() {
   const [showBox, setShowBox] = useState(false);
   const popupRef = useRef(null);
