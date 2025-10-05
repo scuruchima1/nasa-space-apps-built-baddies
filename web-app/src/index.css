@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(102,152,101);
+  background-color: rgb(0,91,77);
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -19,7 +19,8 @@ code {
 #head {
   width: 1200px;
   height: 100px;
-  background-color: rgb(255,255,255); /* white color */
+  background-color: rgb(223,243,152); 
+  color: rgb(0,91,77);
   position: relative;
   top: 25px;
   left: 50px;
@@ -32,16 +33,28 @@ code {
   text-align: center;
   margin-top: 20px;
 }
+#head-text {
+  /* List font alternatives, falling back to generic sans-serif */
+  font-family: 'Century Gothic', 'Futura', 'Trebuchet MS', sans-serif;
+  
+  /* Adjust size and weight */
+  
+  font-weight: bold; 
+  color: rgb(0,91,77);
+}
 
-#box{ 
-  width: 200px;
-  background-color: white;
+#box1{ 
+  width: 500px;
+  background-color: rgb(223,243,152);
+  color:rgb(0,91,77); 
   padding: 10px;
   border-radius: 10px;
   padding-left: 20px;
   border: 3px solid black;
   text-align: left;
   margin: 50px 0 0 50px;
+  font-size: 25px;
+  font-weight: bold;
 }
 
 #built {
@@ -68,44 +81,55 @@ code {
 .content-wrapper {
   /* 1. Keeps the side-by-side layout */
   display: flex; 
-  
   /* 2. Arranges items horizontally */
   flex-direction: row; 
-  
   /* 3. Adds space between the box and the map */
-  gap: 50px; 
-  
-  /* NEW: Ensures the wrapper takes the full width available */
-  width: 100%; 
-  
+  gap: 50px;   
   /* NEW: Pushes the flex items (text box and map) to the end (right) */
-  justify-content: flex-end; /* This is the key change! */
+  justify-content: left; /* This is the key change! */
   
   /* Aligns items to the top */
   align-items: flex-start;
+  padding-top: 100px;
   
   /* Adjust padding/margin for spacing from the edges */
-  padding: 40px 50px; /* Add padding on all sides, especially the right */
+  padding: 40px 100px; /* Add padding on all sides, especially the right */
   box-sizing: border-box; /* Includes padding in the element's total width */
 }
 
 /* Children Sizing (adjust as needed) */
-#box {
-  /* Give the box a maximum size */
-  font-family: 'Times New Roman', Times, serif;
+#box2 {
+  width: 450px;
+  height: 300px;
+  background-color: rgb(223,243,152);
+  color:rgb(0,91,77); 
+  padding: 10px;
+  border-radius: 10px;
+  padding-left: 20px;
+  border: 3px solid black;
+  text-align: left;
+  margin: 50px 0 0 50px;
+  font-size: 25px;
   font-weight: bold;
-  max-width: 300px; 
-  flex-shrink: 0; /* Prevents the box from shrinking too much */
+
 }
 
-#map {
-  /* Give the map area a maximum size */
-  max-width: 400px; 
-}
 
-#map img {
-  /* Ensure the image scales correctly within its container */
-  width: 100%;
-  height: auto;
-  display: block; 
+
+.greenytro{
+  /* Enables Flexbox layout */
+  display: flex; 
+  /* Arranges the text box and logo horizontally */
+  flex-direction: row; 
+  /* Adds space between the two elements */
+  gap: 20px; 
+  /* Centers the whole block horizontally on the page */
+  justify-content: flex-start; 
+  /* Aligns items to the top of the container */
+  align-items: center;
+  /* Adjust margin to control vertical position on the page */
+  margin-top: -20px; /* Example: Move the whole group down from the header */
+}
+.greeny-logo-container{
+  margin-top: -20px;
 }
