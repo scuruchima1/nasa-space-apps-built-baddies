@@ -51,6 +51,24 @@ function App() {
       </div>
      </div>
 
+     {/* drop down menu button section start*/}
+      const [dropdownOptions, setDropdownOptions] = useSTate([]);
+
+      useEffect(() {
+        // load and parse csv
+        Papa.parse("datasets/Muni_25_chi_csv.csv", {
+          download: true,
+          header: true,
+          complete: function(results) {
+            const GEOG = results.data.map(row => row.GEOG).filter(Boolean);
+            const uniqueMunicipalities = [...new Set(municipalities)];
+            setDropdownOptions(uniqueMunicipalities);
+          }
+        })
+      }
+      )
+        {/* dropdown section end  */}
+
     </div>
 
     
