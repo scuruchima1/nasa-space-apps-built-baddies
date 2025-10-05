@@ -6,9 +6,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeMoveDown 2s forwards;
 }
 
 code {
@@ -26,12 +23,18 @@ code {
   left: 50px;
   border: 3px solid black;
   border-radius: 50px;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeMoveDown 2s forwards;
 }
 /* ^^^ text in the rounded square */
 #head-text {
   font-size:50px;
   text-align: center;
   margin-top: 20px;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeMoveDown 2s forwards;
 }
 #head-text {
   /* List font alternatives, falling back to generic sans-serif */
@@ -41,6 +44,9 @@ code {
   
   font-weight: bold; 
   color: rgb(0,91,77);
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeMoveDown 2s forwards;
 }
 
 #box1{ 
@@ -55,14 +61,22 @@ code {
   margin: 50px 0 0 50px;
   font-size: 25px;
   font-weight: bold;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeMoveDown 2s forwards;
 }
 
 #built {
   position: absolute;   
   top: 0px;          
   right: 5px;         
-  width: 100px;         
+  width: 100px; 
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeMoveDown 2s forwards;        
 }
+
+
 
 @keyframes fadeIn {
   to {
@@ -111,7 +125,9 @@ code {
   margin: 50px 0 0 50px;
   font-size: 25px;
   font-weight: bold;
-
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeMoveDown 2s forwards; 
 }
 
 
@@ -129,7 +145,21 @@ code {
   align-items: center;
   /* Adjust margin to control vertical position on the page */
   margin-top: -20px; /* Example: Move the whole group down from the header */
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeMoveDown 2s forwards; 
 }
 .greeny-logo-container{
   margin-top: -20px;
+}
+
+
+#greeny-bot {
+  position: fixed;   /* sticks to viewport */
+  bottom: 20px;      /* distance from bottom */
+  right: 20px;       /* distance from right */
+  z-index: 1000;     /* ensures it overlays other content */
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: fadeMoveDown 2s forwards;  
 }
