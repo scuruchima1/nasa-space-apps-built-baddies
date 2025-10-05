@@ -1,24 +1,27 @@
 # flask-backend/app.py
-from urllib import response
 from flask import Flask, request, jsonify, Response, render_template
 from flask_cors import CORS
 from pathlib import Path
-import json
-import os
+import os, json
 from dotenv import load_dotenv
 from openai import OpenAI
 import requests
-import 'leaflet/dist/leaflet.css';
 
-BASE = Path(__file__).resolve().parent
-load_dotenv()
-
-BASE = Path(__file__).resolve().parent
-DATA_PROCESSED = BASE / "data" / "processed"
+# ---------- Paths ----------
+BASE = Path(__file__).resolve().parent          # /repo/flask-backend
+ROOT = BASE.parent                              # /repo
+DATASETS = ROOT / "datasets"
+DATA_PROCESSED = DATASETS / "processed"
 DATA_PROCESSED.mkdir(parents=True, exist_ok=True)
 
+# ---------- Env ----------
+# Put your .env in flask-backend/.env with OPENAI_API_KEY, etc.
+load_dotenv(BASE / ".env")
+
+# ---------- OpenAI ----------
 client = OpenAI()
 
+# ---------- App ----------
 app = Flask(
     __name__,
     template_folder=str(BASE / "templates"),
@@ -27,67 +30,92 @@ app = Flask(
 )
 CORS(app, resources={r"/*": {"origins": "*"}})
 
+# ---------- Helpers ----------
+def _read_geojson(path: Path) -> Response:
+    if not path.exists():
+        empty = {"type": "FeatureCollection", "features": []}
+        return Response(json.dumps(empty), mimetype="application/geo+json")
+    return Response(path.read_text(), mimetype="application/geo+json")
+
+# ---------- Routes ----------
+@app.get("/health")
+def health():
+    return jsonify({"ok": True})
+
 @app.get("/")
 def home():
-    # optional simple page
     if (BASE / "templates" / "index.html").exists():
         return render_template("index.html")
-    return jsonify({"message": "Backend running. Try /area?city=chicago&level=zip"})
+    return jsonify({"message": "Backend running. Try /cca25?city=chicago or POST /chat"})
 
+# ---- Data layers (served as GeoJSON) ----
+@app.get("/cca25")
+def cca25():
+    city = (request.args.get("city") or "chicago").lower()
+    p = DATA_PROCESSED / f"{city}_cca25.geojson"
+    return _read_geojson(p)
+
+@app.get("/food_access")
+def food_access():
+    city = (request.args.get("city") or "chicago").lower()
+    p = DATA_PROCESSED / f"{city}_food_access.geojson"
+    return _read_geojson(p)
+
+# ---- AI suggestion endpoint ----
 @app.post("/chat")
 def chat():
-    # Parse JSON body
-    data = request.get_json()
-    if not data:
-        return jsonify({"error": "Missing JSON body"}), 400
-
+    # Expect JSON body: { neighborhood, aqi, stores, cover }
+    data = request.get_json(silent=True) or {}
     neighborhood = data.get("neighborhood", "Avondale")
-    aqi = data.get("aqi", 120)
-    stores = data.get("stores", 1)
-    cover = data.get("cover", 23)
+    aqi = data.get("aqi", 120)          # historical AQI
+    stores = data.get("stores", 1)      # grocery stores within 2 miles
+    cover = data.get("cover", 23)       # % tree canopy cover
+
     prompt = f"""
-    You are an advisor to a city planner that takes in data about a neighborhood in Chicago 
-    to give suggestions on what needs to be improved in the area, 
-    whether or not it is suitable for new residential development, 
-    and give reasons to your decision. Limit your response to 200 words.
-    
-    We have the following information about the {neighborhood}: This neighborhood has a historical AQI of {aqi}. This neighborhood has {stores} grocery stores within 2 miles. This neighborhood has {cover}% canopy cover.
+    You are an advisor to a city planner. Using the metrics provided, decide whether
+    the neighborhood is suitable for new residential development, what to improve,
+    and why. Keep it under 200 words. Be specific and action-oriented.
+
+    Neighborhood: {neighborhood}
+    Historical AQI: {aqi}
+    Grocery stores within 2 miles: {stores}
+    Tree canopy cover (%): {cover}
+
+    Return 3 short sections:
+    - Suitability (Yes/No + one-sentence reason)
+    - Key issues
+    - Recommended actions (bulleted)
     """
 
-    response = client.responses.create(
-        model="gpt-5",
-        input=prompt
-    )
-    #gives prompt to Ai
-    print(response.output_text)
-    
-    return jsonify({"message": "ran chat", "response": response.output_text})
+    try:
+        rsp = client.responses.create(model=os.getenv("OPENAI_MODEL", "gpt-5"), input=prompt)
+        return jsonify({"message": "ran chat", "response": rsp.output_text})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
+# ---- Optional EPA AQS sample ----
 @app.get("/pollutiondata")
 def pollution_data():
+    # 88101 = PM2.5 FRM/FEM mass  | 44201 = Ozone
     EPA_EMAIL = os.getenv("EPA_API_EMAIL")
     EPA_KEY = os.getenv("EPA_API_KEY")
+    if not EPA_EMAIL or not EPA_KEY:
+        return jsonify({"error": "Set EPA_API_EMAIL and EPA_API_KEY in .env"}), 400
 
     url = "https://aqs.epa.gov/data/api/dailyData/byCounty"
     params = {
         "email": EPA_EMAIL,
         "key": EPA_KEY,
-        "param": "88101",      # Ozone
-        "bdate": "20160101",   # Start date
-        "edate": "20160229",   # End date
-        "state": "17",         # Illinois
-        "county": "031"        # Cook County
+        "param": "88101",
+        "bdate": "20160101",
+        "edate": "20160229",
+        "state": "17",   # Illinois
+        "county": "031"  # Cook County
     }
-    
-    response = requests.get(url, params=params)
-    
-    # Check if the request was successful
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return {"error": f"Failed to fetch data, status code: {response.status_code}"}
+    r = requests.get(url, params=params, timeout=30)
+    return jsonify(r.json()), r.status_code
 
+# ---------- Main ----------
 if __name__ == "__main__":
-    # Use the same interpreter you installed Flask with
-    app.run(host="0.0.0.0", port=5500, debug=True)
-
+    port = int(os.getenv("PORT", "5500"))
+    app.run(host="0.0.0.0", port=port, debug=True)
