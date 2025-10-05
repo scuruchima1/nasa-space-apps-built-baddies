@@ -35,9 +35,18 @@ function App() {
         <div className="greeny-logo-container"></div>
          <img src="rgreeny.png" alt="greeny" width="300" height="300"></img>
         </div>
+     
+
+     <div className= "Gen_Dashboard">
+      <div id= "banner">
+        <p> Chicago Dashboard</p>
       </div>
+      <div id = "mini banner">
+        <p> The following dashboard provides visualizations based on data from the general Chicago Land area!</p>
+      </div>
+     </div>
 
-
+    </div>
 
     
   );
