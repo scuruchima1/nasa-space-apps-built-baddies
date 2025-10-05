@@ -52,7 +52,8 @@ function App() {
      </div>
 
      {/* drop down menu button section start*/}
-      const [dropdownOptions, setDropdownOptions] = useSTate([]);
+      
+      {/* const [dropdownOptions, setDropdownOptions] = useSTate([]); 
 
       useEffect(() {
         // load and parse csv
@@ -67,7 +68,8 @@ function App() {
         })
       }
       )
-        {/* dropdown section end  */}
+        {/* dropdown section end */}
+
 
     </div>
 
