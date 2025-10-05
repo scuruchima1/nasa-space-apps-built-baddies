@@ -29,8 +29,9 @@ function App() {
       <div className= "greenytro">
         <div id="box">
           <p> As you use our urban planning tool we also have our personal assitant Greeny at your disposal!  </p>
+           <ChatRunner />
         </div>
-        <ChatRunner />
+        
        
 
       </div>
