@@ -48,7 +48,7 @@ function App() {
           {/* Text Box 2: (Bottom Box) */}
           <div className="intro-textbox box-two">
             <p>
-              Our considerations include, but are not limited to, population density, pollution, and available green spaces.
+            Our analysis focuses on key factors including population density, pollution levels, and income. While we encorage furthur research with our tool,  it is critical that researchers acknowledge that  association does not imply causation, all data should be approached with necessary historical and social considerations to ensure responsible and actionable insights.
             </p>
           </div>
 
