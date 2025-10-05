@@ -4,8 +4,8 @@ import './App.css';
 import ChatRunner from "./components/components";
 
 // added for dropdown menu
-import React, { useEffect, useState } from "react";
-import Papa from "papaparse";
+// import React, { useEffect, useState } from "react";
+// import Papa from "papaparse";
 
 function App() {
   return (
