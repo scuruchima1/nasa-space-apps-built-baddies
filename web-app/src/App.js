@@ -4,8 +4,69 @@ import './App.css';
 import ChatRunner from "./components/components";
 
 // added for dropdown menu
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef} from "react";
 import Papa from "papaparse";
+
+
+
+function GreenyCircle() {
+  const [showBox, setShowBox] = useState(false);
+  const popupRef = useRef(null);
+  const circleRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target) &&
+        circleRef.current &&
+        !circleRef.current.contains(event.target)
+      ) {
+        setShowBox(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  return (
+    <div>
+      <div
+        id="greeny-bot"
+        className="circle"
+        ref={circleRef}
+        onClick={() => setShowBox(!showBox)}
+      >
+        <img src="rgreeny.png" alt="greeny" width="150" height="150" />
+      </div>
+
+      {showBox && (
+        <div
+          ref={popupRef}
+          id="popup-box"
+          style={{
+            position: "fixed",
+            bottom: "20px",
+            right: "190px",
+            width: "300px",
+            padding: "20px",
+            backgroundColor: "rgb(223,243,152)",
+            border: "3px solid black",
+            borderRadius: "10px",
+            boxShadow: "0 4px 10px rgba(0,0,0,0.2)",
+          }}
+        >
+          <p>Hello! I’m Greeny. How can I help you today?</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+
 
 function App() {
   const [dropdownOptions, setDropdownOptions] = useState([]);
@@ -99,10 +160,7 @@ function App() {
         </select>
       </div>
 
-      <div id="greeny-bot" class="circle">
-        <img src="rgreeny.png" alt="greeny" width="150" height="150" />
-      </div>
-
+      <GreenyCircle />
     </div>
   );
 }
