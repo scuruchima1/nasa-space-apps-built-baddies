@@ -115,6 +115,46 @@ def pollution_data():
     r = requests.get(url, params=params, timeout=30)
     return jsonify(r.json()), r.status_code
 
+# --- list community areas (id + name) ---
+@app.get("/cca25/names")
+def cca25_names():
+    city = (request.args.get("city") or "chicago").lower()
+    p = DATA_PROCESSED / f"{city}_cca25.geojson"
+    if not p.exists():
+        return jsonify([])
+    fc = json.loads(p.read_text())
+    rows = []
+    for f in fc.get("features", []):
+        pr = f.get("properties", {}) or {}
+        rows.append({
+            "id": pr.get("CA_ID") or pr.get("area_numbe") or pr.get("area_num"),
+            "name": pr.get("CA_NAME") or pr.get("community") or pr.get("GEOG"),
+        })
+    # de-dup and sort by name
+    uniq = {(r["id"], r["name"]) for r in rows if r["id"] is not None}
+    out = [{"id": i, "name": n} for (i, n) in sorted(uniq, key=lambda t: (t[1] or ""))]
+    return jsonify(out)
+
+# --- fetch one area’s properties by id ---
+@app.get("/cca25/area")
+def cca25_area():
+    city = (request.args.get("city") or "chicago").lower()
+    ca_id = request.args.get("id")
+    if not ca_id:
+        return jsonify({"error": "missing ?id=<CA_ID>"}), 400
+
+    p = DATA_PROCESSED / f"{city}_cca25.geojson"
+    if not p.exists():
+        return jsonify({"error": "dataset missing"}), 404
+    fc = json.loads(p.read_text())
+    for f in fc.get("features", []):
+        pr = f.get("properties", {}) or {}
+        pid = pr.get("CA_ID") or pr.get("area_numbe") or pr.get("area_num")
+        # accept numeric or string id
+        if str(pid) == str(ca_id):
+            return jsonify(pr)
+    return jsonify({"error": "not found"}), 404
+
 # ---------- Main ----------
 if __name__ == "__main__":
     port = int(os.getenv("PORT", "5500"))
