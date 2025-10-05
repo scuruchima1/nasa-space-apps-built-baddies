@@ -84,9 +84,9 @@ code {
   /* 2. Arranges items horizontally */
   flex-direction: row; 
   /* 3. Adds space between the box and the map */
-  gap: 50px;   
+  gap: 40px;   
   /* NEW: Pushes the flex items (text box and map) to the end (right) */
-  justify-content: left; /* This is the key change! */
+  justify-content: center; /* This is the key change! */
   
   /* Aligns items to the top */
   align-items: flex-start;
