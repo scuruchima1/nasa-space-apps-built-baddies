@@ -26,71 +26,66 @@ function App() {
     });
   }, []);  
 
- return (
+  return (
     <div className="App" backgroundColor="rgb(0,91,77)">
-      <div id="head"> <p id="head-text">B[U]ILT X Urban Planning Initiative</p>
-       <a href="https://built-illinois.org/#/Home">
-        <img id="built" src={builtLogo} alt="Built Logo" />
-       </a>
+
+      <div id="head">
+        <p id="head-text">B[U]ILT X Urban Planning Initiative</p>
+        <a href="https://built-illinois.org/#/Home">
+          <img id="built" src={builtLogo} alt="Built Logo" />
+        </a>
       </div>
-   
-  
-  
-    <section className="content-wrapper">
-      <div className="stacked-text-container">
-  
-  
-        <div className="intro-textbox box-one">
-          <p>
-            This website is a tool for urban planners that leverages data to provide appropriate initiatives in the city of Chicago.
-          </p>
+
+      <section className="content-wrapper">
+        <div className="stacked-text-container">
+
+          <div className="intro-textbox box-one">
+            <p>
+              This website is a tool for urban planners that leverages data to provide appropriate initiatives in the city of Chicago.
+            </p>
+          </div>
+
+          {/* Text Box 2: (Bottom Box) */}
+          <div className="intro-textbox box-two">
+            <p>
+              Our considerations include, but are not limited to, population density, pollution, and available green spaces.
+            </p>
+          </div>
+
         </div>
-  
-  
-        {/* Text Box 2: (Bottom Box) */}
-        <div className="intro-textbox box-two">
-          <p>
-            Our considerations include, but are not limited to, population density, pollution, and available green spaces.
-          </p>
-        </div>
-      </div>
+
         <div className="map">
-         <img src="chi-map.png" alt="Chicago Map" width="766" height="458" />
+          <img src="chi-map.png" alt="Chicago Map" width="766" height="458" />
         </div>
-  
-  
-     </section>
-  
-  
-  
-  
-      <div className= "greenytro">
-        <img src="animated_city.png" width="500" height= "500"></img>
+
+      </section>
+
+      <div className="greenytro">
+        <img src="animated_city.png" width="500" height="600" />
         <div id="box2">
-          <p> As you use our urban planning tool we also have our personal assitant Greeny at your disposal!  </p>
-           <ChatRunner />
+          <p>
+            As you use our urban planning tool we also have our personal assitant Greeny at your disposal!
+          </p>
+          <ChatRunner />
         </div>
         <div className="greeny-logo-container"></div>
-         <img src="rgreeny.png" alt="greeny" width="300" height="300"></img>
+        <img src="rgreeny.png" alt="greeny" width="300" height="300" />
       </div>
-    
-    <div id= "Dashboard_header">
-      <p>Data Dashboards</p>
-    </div>
-  
-  
-     <div className= "Gen_Dashboard">
-      <div id = "mini_banner">
-        <p> The following dashboard provides visualizations based on data from the general Chicago Land area and your neighborhood of choice!</p>
+
+      <div id="Dashboard_header">
+        <p>Data Dashboards</p>
       </div>
-      <div id= "banner">
-        <p> Chicago Dashboard</p>
+
+      <div className="Gen_Dashboard">
+        <div id="mini_banner">
+          <p>
+            The following dashboard provides visualizations based on data from the general Chicago Land area and your neighborhood of choice!
+          </p>
+        </div>
+        <div id="banner">
+          <p>Chicago Dashboard</p>
+        </div>
       </div>
-     </div>
-  
-  
-  
-  
 
       <div id="dropdown-container">
         <label htmlFor="neighborhood-select" style={{ color: "white" }}>
@@ -103,6 +98,11 @@ function App() {
           ))}
         </select>
       </div>
+
+      <div id="greeny-bot" class="circle">
+        <img src="rgreeny.png" alt="greeny" width="150" height="150" />
+      </div>
+
     </div>
   );
 }
