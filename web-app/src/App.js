@@ -12,12 +12,12 @@ function App() {
 
   useEffect(() => {
     // Load and parse CSV
-    Papa.parse("../../datasets/Muni_25_chi_csv.csv", {
+    Papa.parse("Neighborhoods_2012b_20251005.csv", {
       download: true,
       header: true,
       complete: function(results) {
         // Assuming column name is "GEOG"
-        const neighborhoods = results.data.map(row => row.GEOG).filter(Boolean);
+        const neighborhoods = results.data.map(row => row.PRI_NEIGH).filter(Boolean);
         const uniqueNeighborhoods = [...new Set(neighborhoods)];
         setDropdownOptions(uniqueNeighborhoods);
       }
