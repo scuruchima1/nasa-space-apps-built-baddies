@@ -92,31 +92,45 @@ code {
   }
 }
 
-.content-wrapper {
-  /* 1. Keeps the side-by-side layout */
-  display: flex; 
-  /* 2. Arranges items horizontally */
-  flex-direction: row; 
-  /* 3. Adds space between the box and the map */
-  gap: 40px;   
-  /* NEW: Pushes the flex items (text box and map) to the end (right) */
-  justify-content: center; /* This is the key change! */
-  
-  /* Aligns items to the top */
-  align-items: flex-start;
-  padding-top: 100px;
-  
-  /* Adjust padding/margin for spacing from the edges */
-  padding: 40px 100px; /* Add padding on all sides, especially the right */
-  box-sizing: border-box; /* Includes padding in the element's total width */
-}
-
-/* Children Sizing (adjust as needed) */
-#box2 {
+.stacked-text-container {
+  display: flex;
+  /* This forces the two text boxes inside to stack vertically */
+  flex-direction: column;
+  /* Add a small gap between the two stacked boxes */
+  gap: 15px;
+ }
+ 
+ 
+ /* --- Existing CSS for Individual Boxes (now shared) --- */
+ .intro-textbox {
+ font-family: 'Century Gothic', 'Futura', 'Trebuchet MS', sans-serif;
+  /* Styles for the light yellow-green boxes: */
+  background-color: rgb(223, 243, 152); /* #DFF398 */
+  color: rgb(0, 91, 78); /* #005B4E */
+  padding: 20px;
+  border-radius: 10px;
+  /* Ensures the boxes don't take up the full width of the screen */
+  width: 350px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 3px solid #005B4E;
+  font-weight: 500;
+ }
+ 
+ 
+ /* Ensure the main content wrapper (beside the image) is still functional */
+ .content-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* or flex-start, depending on your final position */
+  gap: 40px;
+  margin-top: 60px;
+ }
+ /* Children Sizing (adjust as needed) */
+ #box2 {
   width: 450px;
   height: 300px;
   background-color: rgb(223,243,152);
-  color:rgb(0,91,77); 
+  color:rgb(0,91,77);
   padding: 10px;
   border-radius: 10px;
   padding-left: 20px;
@@ -125,33 +139,97 @@ code {
   margin: 50px 0 0 50px;
   font-size: 25px;
   font-weight: bold;
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeMoveDown 2s forwards; 
-}
-
-
-
-.greenytro{
+ 
+ 
+ }
+ 
+ 
+ 
+ .greenytro{
   /* Enables Flexbox layout */
-  display: flex; 
+  display: flex;
   /* Arranges the text box and logo horizontally */
-  flex-direction: row; 
+  flex-direction: row;
   /* Adds space between the two elements */
-  gap: 20px; 
+  gap: 20px;
   /* Centers the whole block horizontally on the page */
-  justify-content: flex-start; 
+  justify-content: flex-start;
   /* Aligns items to the top of the container */
   align-items: center;
   /* Adjust margin to control vertical position on the page */
   margin-top: -20px; /* Example: Move the whole group down from the header */
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: fadeMoveDown 2s forwards; 
-}
-.greeny-logo-container{
+ }
+ .greeny-logo-container{
   margin-top: -20px;
-}
+ }
+ #banner {
+  width: 550px;
+  /* Removed fixed height: Flexbox will determine height based on content */
+  /* height: 70px; */
+ 
+ 
+  background-color: rgb(0, 91, 78); /* Light yellow-green: #DFF398 */
+  color:rgb(223, 243, 152);                 /* Dark teal/pine green: #005B4E */
+   /* Retained your original padding for overall size, but we'll center content inside */
+  padding: 25px;
+  border-radius: 10px;
+  /* Removed 'border: 3px solid black;' as your design uses no black border here */
+   /* --- KEY CHANGES FOR CENTERING --- */
+  display: flex; /* 1. Enable Flexbox on the container */
+  justify-content: center; /* 2. Center content horizontally */
+  align-items: center; /* 3. Center content vertically */
+   /* --- RETAINED & ADJUSTED STYLES --- */
+  font-size: 50px;
+  font-weight: bolder;
+  font-family: 'Century Gothic', 'Futura', 'Trebuchet MS', sans-serif;
+   /* Adjusted margin for horizontal centering (assuming it's a floating element) */
+  /* To place it horizontally centered in the screen: */
+  /* margin: 50px auto 0 auto; */
+  /* If it needs to be flush left like in your original code, use: */
+  margin: 50px 0 0 50px;
+ }
+ 
+ 
+ /* IMPORTANT: Target the <p> tag inside and remove default browser margins */
+ #banner p {
+    margin: 0;
+    padding: 0;
+ }
+ 
+ 
+ #mini_banner{
+  width: 50;
+  height: 60px;
+  background-color: white;
+  color:rgb(0,91,77);
+  padding-top: 10px;
+  border-radius: 10px;
+  border: 3px solid rgb(223,243,152);
+  text-align: center;
+  margin: 50px 0 0 50px;
+  font-size: 20px;
+  font-weight: bold;
+ }
+ 
+ 
+ #Dashboard_header {
+  width: 400px;
+  height: 100px;
+  background-color: white;
+  color: #005B4E;
+  padding: 10px;
+  border-radius: 10px;
+  border: 3px solid rgb(223,243,152);
+  text-align: center;
+  font-size: 40px;
+  font-weight: bolder;
+  font-family: 'Century Gothic', 'Futura', 'Trebuchet MS', sans-serif;
+  margin: 50px auto 0 auto;
+ 
+ 
+ 
+ 
+ }
 
 
 #greeny-bot {
