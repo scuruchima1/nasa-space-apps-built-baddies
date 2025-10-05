@@ -8,6 +8,7 @@ import os
 from dotenv import load_dotenv
 from openai import OpenAI
 import requests
+import 'leaflet/dist/leaflet.css';
 
 BASE = Path(__file__).resolve().parent
 load_dotenv()
@@ -72,4 +73,3 @@ if __name__ == "__main__":
     # Use the same interpreter you installed Flask with
     app.run(host="0.0.0.0", port=5500, debug=True)
 
-#visualization

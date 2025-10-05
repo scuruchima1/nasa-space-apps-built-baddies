@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+/* dropdown start */
+#dropdown-container {
+  margin: 20px;
+}
+
+#neighborhood_select {
+  padding: 8px;
+  font-size: 16px
+}

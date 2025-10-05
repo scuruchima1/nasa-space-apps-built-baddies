@@ -4,10 +4,26 @@ import './App.css';
 import ChatRunner from "./components/components";
 
 // added for dropdown menu
-// import React, { useEffect, useState } from "react";
-// import Papa from "papaparse";
+import React, { useEffect, useState } from "react";
+import Papa from "papaparse";
 
 function App() {
+ const [dropdownOptions, setDropdownOptions] = useState([]);
+
+  useEffect(() => {
+    // Load and parse CSV
+    Papa.parse("../../datasets/Muni_25_chi_csv.csv", {
+      download: true,
+      header: true,
+      complete: function(results) {
+        // Assuming column name is "GEOG"
+        const neighborhoods = results.data.map(row => row.GEOG).filter(Boolean);
+        const uniqueNeighborhoods = [...new Set(neighborhoods)];
+        setDropdownOptions(uniqueNeighborhoods);
+      }
+    });
+  }, []);  
+  
   return (
     <div className="App" backgroundColor="rgb(0,91,77)">
       <div id="head"> <p id="head-text">B[U]ILT X Urban Planning Initiative</p>
@@ -51,30 +67,22 @@ function App() {
       </div>
      </div>
 
-     {/* drop down menu button section start*/}
-      
-      {/* const [dropdownOptions, setDropdownOptions] = useSTate([]); 
+    <div id="dropdown-container">
+          <label htmlFor="neighborhood-select" style={{ color: "white" }}>Select a Neighborhood:</label>
+          <select id="neighborhood-select">
+            <option value="">--Choose an option--</option>
+            {dropdownOptions.map((option, index) => (
+              <option key={index} value={option}>{option}</option>
+            ))}
+          </select>
+        </div>
 
-      useEffect(() {
-        // load and parse csv
-        Papa.parse("datasets/Muni_25_chi_csv.csv", {
-          download: true,
-          header: true,
-          complete: function(results) {
-            const GEOG = results.data.map(row => row.GEOG).filter(Boolean);
-            const uniqueMunicipalities = [...new Set(municipalities)];
-            setDropdownOptions(uniqueMunicipalities);
-          }
-        })
-      }
-      )
-        {/* dropdown section end */}
-
+     <div id="map">
+          <img src="chi-map.png" alt="Chicago Map" width="766" height="458" />
+        </div>
 
     </div>
-
-    
-  );
+          );
 }
 
 export default App;
