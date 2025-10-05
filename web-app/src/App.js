@@ -88,7 +88,7 @@ function App() {
         <img src="chi-map.png" alt="Chicago Map" width="766" height="458" />
       </div>
 
-      <div id="greeny-bot">
+      <div id="greeny-bot" class="circle">
         <img src="rgreeny.png" alt="greeny" width="150" height="150"/>
       </div>
 
